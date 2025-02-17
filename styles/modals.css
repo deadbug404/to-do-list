@@ -1,0 +1,46 @@
+#add_project_modal{
+    width: 500px;
+    height: 200px;
+    background-color: black;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+    position: absolute;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 10px;
+    animation: zoomIn;
+    animation-duration: 1s;
+}
+
+
+#add_project_modal label{
+    width: 200px;
+    display: inline-block;
+}
+
+#add_project_modal input{
+    width: 200px;
+    border-radius: 5px;
+    height: 30px;
+}
+
+#add_project_modal input[type="text"]{
+    padding-left: 5px;
+    border: none;
+}
+
+#add_project_modal button{
+    border: none;
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+#add_project_modal button:hover{
+    cursor: pointer;
+}
