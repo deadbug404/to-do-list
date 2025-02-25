@@ -1,3 +1,7 @@
+import { show_content } from "./todos";
+import { addProjectModal } from "./modals";
+
+
 class Project{
     
     constructor(name,color){
@@ -22,6 +26,7 @@ let checkProject = (name,color) => {
     if(!localStorage.getItem(name)){
         let project = new Project(name,color);
         project.saveProject();
+        refreshProjectList();
         return true
     }
 }
@@ -40,18 +45,38 @@ let addProjectToList = (name,color) => {
     let link = document.createElement("a");
     link.textContent = name;
     link.style.color = color;
+    link.setAttribute("id",name);
     projects.insertBefore(link,projects.children[projects.children.length-1]);
 }
 
 let refreshProjectList = () => {
-    let projects = document.querySelector("#projects");
+    let projectsList = document.querySelector("#projects");
+    projectsList.textContent = "";
+
+    let add_new_project_button = document.createElement("button");
+    add_new_project_button.setAttribute("id","#add_new_project");
+    add_new_project_button.addEventListener("click", addProjectModal);
+    add_new_project_button.textContent = "+";
+
+    projectsList.appendChild(add_new_project_button);
+
     let projectNames = Object.keys(getAllProject());
     projectNames.forEach(project => {
         let link = document.createElement("a");
         link.textContent = project;
         link.style.color = JSON.parse(localStorage.getItem(project)).color;
-        projects.insertBefore(link,projects.children[projects.children.length-1]);
+        link.setAttribute("id",project);
+        projectsList.insertBefore(link,projectsList.children[projectsList.children.length-1]);
     })
+
+    let projects = Array.from(document.querySelectorAll("a"));
+    projects.forEach(project => {
+        project.addEventListener("click", (e) => {
+            show_content(e.target.id);
+        })
+    });
+
+
 }
 
 export {checkProject,refreshProjectList}

@@ -1,9 +1,11 @@
 import "../styles/main.css";
 import "animate.css";
 import { addProjectModal } from "../scripts/modals";
-import { refreshProjectList } from "../scripts/project";
+import { refreshProjectList,checkProject } from "../scripts/project";
+import { show_content } from "../scripts/todos";
 
+checkProject("default","white");
 refreshProjectList();
-let add_new_project = document.querySelector("#add_new_project");
-add_new_project.addEventListener("click", addProjectModal);
+
+
 
