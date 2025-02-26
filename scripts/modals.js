@@ -1,7 +1,7 @@
 import "../styles/modals.css"
 import "animate.css"
 import { refreshProjectList, checkProject } from "./project";
-import { add_task, add_project, complete_task, delete_task } from "./events";
+import { add_task, add_project, complete_task, delete_task, delete_project, closeModal } from "./events";
 
 function setAttributes(elem, attrs){
     for(let key in attrs){
@@ -13,10 +13,6 @@ function appendChildren(parent,children){
     children.forEach(child => {
         parent.appendChild(child);
     });
-}
-
-let closeModal = function(modal) {
-    modal.remove();
 }
 
 let addProjectModal = function () {
@@ -97,13 +93,7 @@ let showContentModal = function(key,container){
     let heading = document.createElement("h2");
     heading.textContent = "To Do's";
 
-    let add_new_todo_button = document.createElement("buton");
-    add_new_todo_button.setAttribute("id","add_new_todo_button");
-    add_new_todo_button.textContent = "Add task";
-    add_new_todo_button.addEventListener("click",()=>{addTodoModal(key)});
-
     todo.appendChild(heading);
-
 
     let todos_object = JSON.parse(localStorage.getItem(key));
     let todos_values = todos_object.todo;
@@ -128,8 +118,19 @@ let showContentModal = function(key,container){
 
         todo.appendChild(div);
     })
+
+    let add_new_todo_button = document.createElement("button");
+    add_new_todo_button.setAttribute("id","add_new_todo_button");
+    add_new_todo_button.textContent = "Add task";
+    add_new_todo_button.addEventListener("click",()=>{addTodoModal(key)});
+
+    let delete_project_button = document.createElement("button");
+    delete_project_button.setAttribute("id","delete_project_button");
+    delete_project_button.textContent = "Delete Project";
+    delete_project_button.addEventListener("click",(e)=>{delete_project(key,e)});
     
     todo.appendChild(add_new_todo_button);
+    todo.appendChild(delete_project_button);
 
     let completed = document.createElement("div");
     completed.classList.add("card");

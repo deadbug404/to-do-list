@@ -13,7 +13,7 @@
 }
 
 html,body{
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     text-align: center;
@@ -25,10 +25,7 @@ html,body{
     background-color: #493628;
     color: white;
     padding: 10px;
-}
-
-#content{
-    flex: 5;
+    overflow: scroll;
 }
 
 #projects{
@@ -53,17 +50,21 @@ html,body{
 
 #content{
     background-image: url("../images/background_image1.jpg");
-    background-size: contain;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 100px;
+    flex: 5;
+    height: 100%;
 }
 
 a{
     text-decoration: none;
     color: white;
     width: 60%;
+    padding: 5px;
+    border-radius: 10px;
 }
 
 a:hover{
@@ -74,4 +75,44 @@ a:hover{
 
 h1{
     margin-bottom: 50px;
+}
+
+@media only screen and (max-width: 800px) {
+    body{
+        display: block;
+    }
+
+    #nav{
+        height: 100px;
+    }
+
+    #header{
+        display: flex;
+        padding-bottom: 10px;
+        border-bottom: 1px solid white;
+        margin-bottom: 20px;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+
+    #header h1{
+        margin-bottom: 0;
+    }
+
+    #header button{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: none;
+    }
+
+    #projects{
+        gap: 5px;
+    }
+
+    #content{
+        flex-direction: column;
+    }
+
 }

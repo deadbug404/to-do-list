@@ -1,6 +1,6 @@
 import { Todo, show_content } from "./todos";
 import { showContentModal } from "./modals";
-import { checkProject } from "./project";
+import { checkProject, refreshProjectList } from "./project";
 
 let add_task = function(key,description){
     let task = new Todo(key);
@@ -35,4 +35,30 @@ let add_project = function(name,color){
     }
 }
 
-export {add_task, complete_task , delete_task ,add_project}
+let delete_project = function(key,e){
+    localStorage.removeItem(key);
+    refreshProjectList();
+    
+    let cards = document.querySelectorAll(".card");
+    cards.forEach(card=>{
+        card.remove();
+    });
+}
+
+let closeModal = function(modal) {
+    modal.remove();
+}
+
+let selectProject = function(e){
+    if(!(e.target.id == "nav") && !(e.target.id == "projects")){
+        for(const child of e.target.parentElement.children){
+            if(child.style.border == "1px solid white"){
+                child.style.border = "";
+            }
+        }
+    
+        e.target.style.border = "1px solid white";
+    }
+}
+
+export {add_task, complete_task , delete_task , delete_project, add_project, closeModal, selectProject}

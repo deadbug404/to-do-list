@@ -52,13 +52,23 @@ let addProjectToList = (name,color) => {
 let refreshProjectList = () => {
     let projectsList = document.querySelector("#projects");
     projectsList.textContent = "";
+    let header = document.querySelector("#header");
+    header.textContent = "";
+
+    let heading = document.createElement("h1");
+    heading.textContent = "Projects";
 
     let add_new_project_button = document.createElement("button");
     add_new_project_button.setAttribute("id","#add_new_project");
     add_new_project_button.addEventListener("click", addProjectModal);
     add_new_project_button.textContent = "+";
 
-    projectsList.appendChild(add_new_project_button);
+    header.appendChild(heading);
+    if(window.innerWidth <= 800){
+        header.appendChild(add_new_project_button)
+    }else{
+        projectsList.appendChild(add_new_project_button);
+    }
 
     let projectNames = Object.keys(getAllProject());
     projectNames.forEach(project => {
@@ -73,6 +83,7 @@ let refreshProjectList = () => {
     projects.forEach(project => {
         project.addEventListener("click", (e) => {
             show_content(e.target.id);
+
         })
     });
 
